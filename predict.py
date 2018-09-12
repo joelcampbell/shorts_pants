@@ -14,7 +14,7 @@ y = dataset['clothing']
 clf = tree.DecisionTreeClassifier()
 
 # train tree
-train = clf.fit(x,y)
+model = clf.fit(x,y)
 
 # retrieve temp values for model
 temp_min = temp['temp_min']
@@ -27,4 +27,9 @@ predict = predict.reshape(1,-1)
 # predict shorts or pants
 prediction = clf.predict(predict)
 
-print(prediction)
+# use joblib to persist model
+from sklearn.externals import joblib
+
+# save the file to the current working directory
+joblib_file = "joblib_model.pk1"
+joblib.dump(model, joblib_file)
